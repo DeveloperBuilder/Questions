@@ -33,7 +33,7 @@ namespace Questions
         {
             Console.WriteLine("Beantwoord de volgende 3 vragen");
             Console.Write("Wat is uw geslacht (m/v)? ");
-            bool geslacht = Console.ReadLine();
+            bool geslacht = Convert.ToBoolean(Console.ReadLine());
             Console.Write("Wat is uw leeftijd? ");
             int leeftijd = Int32.Parse(Console.ReadLine());
             Console.Write("Wat heeft u vandaag besteed? ");
