@@ -34,13 +34,19 @@ namespace Questions
             bool geslacht;
             int leeftijd;
             int bestedingen;
-            Console.WriteLine("Beantwoord de volgende 3 vragen");
-            Console.Write("Wat is uw geslacht? (m/v) ");
-            geslacht = Convert.ToBoolean(Console.ReadLine());
-            Console.Write("Wat is uw leeftijd? ");
-            leeftijd = Int32.Parse(Console.ReadLine());
-            Console.Write("Wat heeft u vandaag besteed? ");
-            bestedingen = Int32.Parse(Console.ReadLine());
+            string j;
+            do
+            {
+                Console.WriteLine("Beantwoord de volgende 3 vragen");
+                Console.Write("Wat is uw geslacht? (m/v) ");
+                geslacht = Convert.ToBoolean(Console.ReadLine());
+                Console.Write("Wat is uw leeftijd? ");
+                leeftijd = Int32.Parse(Console.ReadLine());
+                Console.Write("Wat heeft u vandaag besteed? ");
+                bestedingen = Int32.Parse(Console.ReadLine());
+                Console.Write("Wilt u nog een persoon invoeren? (j/n) ");
+                j = Console.ReadLine();
+            } while (true);
             Console.ReadLine();
         }
     }
