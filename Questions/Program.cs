@@ -40,6 +40,13 @@ namespace Questions
                 Console.WriteLine("Beantwoordt de volgende 3 vragen:");
                 Console.Write("Wat is uw geslacht? (m/v) ");
                 geslacht = Convert.ToString(Console.ReadLine());
+                while (geslacht == "m")
+                {
+                    while (geslacht == "v")
+                    {
+                        Console.WriteLine(geslacht);
+                    }
+                }
                 if (geslacht == "m")
                 {
                     if (geslacht == "v")
