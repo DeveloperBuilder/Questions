@@ -31,23 +31,33 @@ namespace Questions
 
         static void Main(string[] args)
         {
-            bool geslacht;
+            string geslacht;
             int leeftijd;
             int bestedingen;
-            string j;
+            string antwoord;
             do
             {
-                Console.WriteLine("Beantwoord de volgende 3 vragen");
+                Console.WriteLine("Beantwoordt de volgende 3 vragen:");
                 Console.Write("Wat is uw geslacht? (m/v) ");
-                geslacht = Convert.ToBoolean(Console.ReadLine());
+                geslacht = Convert.ToString(Console.ReadLine());
+                if (geslacht == "m")
+                {
+                    if (geslacht == "v")
+                    {
+
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Kies m of v");
+                }
                 Console.Write("Wat is uw leeftijd? ");
                 leeftijd = Int32.Parse(Console.ReadLine());
                 Console.Write("Wat heeft u vandaag besteed? ");
                 bestedingen = Int32.Parse(Console.ReadLine());
-                Console.Write("Wilt u nog een persoon invoeren? (j/n) ");
-                j = Console.ReadLine();
+                Console.Write("Wilt u nog een persoon invoeren? (J/N) ");
+                antwoord = Console.ReadLine();
             } while (true);
-            Console.ReadLine();
         }
     }
 }
