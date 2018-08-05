@@ -61,7 +61,7 @@ namespace Questions
                 bestedingen = Int32.Parse(Console.ReadLine());
                 Console.Write("Wilt u nog een persoon invoeren? (J/N) ");
                 antwoord = Console.ReadLine();
-            } while (true);
+            } while (Convert.ToBoolean(antwoord.ToLower()));
         }
     }
 }
