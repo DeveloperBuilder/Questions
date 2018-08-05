@@ -42,10 +42,11 @@ namespace Questions
                 geslacht = Convert.ToString(Console.ReadLine());
                 if (geslacht == "m")
                 {
-                    if (geslacht == "v")
-                    {
-                        Console.WriteLine(geslacht);
-                    }
+                    Console.WriteLine(geslacht);
+                }
+                else if (geslacht == "v")
+                {
+                    Console.WriteLine(geslacht);
                 }
                 else
                 {
