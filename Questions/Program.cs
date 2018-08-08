@@ -42,7 +42,7 @@ namespace Questions
                 {
                     Console.Write("Wat is uw geslacht? (m/v) ");
                     geslacht = Convert.ToString(Console.ReadLine());
-                } while (geslacht.ToLower != "m" || != "v");
+                } while (geslacht.ToLower() != "m" && geslacht.ToLower() != "v");
                 Console.Write("Wat is uw leeftijd? ");
                 leeftijd = Int32.Parse(Console.ReadLine());
                 Console.Write("Wat heeft u vandaag besteed? ");
