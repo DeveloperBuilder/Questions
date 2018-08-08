@@ -38,24 +38,11 @@ namespace Questions
             do
             {
                 Console.WriteLine("Beantwoordt de volgende 3 vragen:");
-                Console.Write("Wat is uw geslacht? (m/v) ");
-                geslacht = Convert.ToString(Console.ReadLine());
-                if (geslacht == "m")
+                do
                 {
-                    Console.WriteLine(geslacht);
-                }
-                else if (geslacht == "v")
-                {
-                    Console.WriteLine(geslacht);
-                }
-                else
-                {
-                    while (true)
-                    {
-                        Console.Write("Wat is uw geslacht? (m/v) ");
-                        geslacht = Convert.ToString(Console.ReadLine());
-                    }
-                }
+                    Console.Write("Wat is uw geslacht? (m/v) ");
+                    geslacht = Convert.ToString(Console.ReadLine());
+                } while (geslacht.ToLower != "m" || != "v");
                 Console.Write("Wat is uw leeftijd? ");
                 leeftijd = Int32.Parse(Console.ReadLine());
                 Console.Write("Wat heeft u vandaag besteed? ");
