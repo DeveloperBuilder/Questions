@@ -35,6 +35,7 @@ namespace Questions
             int leeftijd;
             int bestedingen;
             string antwoord;
+            string toestemming;
             do
             {
                 Console.WriteLine("Beantwoordt de volgende 3 vragen:");
@@ -45,6 +46,16 @@ namespace Questions
                 } while (geslacht.ToLower() != "m" && geslacht.ToLower() != "v");
                 Console.Write("Wat is uw leeftijd? ");
                 leeftijd = Int32.Parse(Console.ReadLine());
+                if (leeftijd < 16)
+                {
+                    Console.WriteLine("Hebt u toestemming van uw ouders of voogd? (J/N)");
+                    toestemming = Console.ReadLine();
+                    while (toestemming.ToLower() != "j")
+                    {
+                        Console.WriteLine("Vraag nogmaals toestemming van uw ouders of voogd? (J/N)");
+                        toestemming = Console.ReadLine();
+                    }
+                }
                 Console.Write("Wat heeft u vandaag besteed? ");
                 bestedingen = Int32.Parse(Console.ReadLine());
                 Console.Write("Wilt u nog een persoon invoeren? (J/N) ");
