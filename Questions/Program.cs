@@ -44,18 +44,30 @@ namespace Questions
                     Console.Write("Wat is uw geslacht? (m/v) ");
                     geslacht = Convert.ToString(Console.ReadLine());
                 } while (geslacht.ToLower() != "m" && geslacht.ToLower() != "v");
-                Console.Write("Wat is uw leeftijd? ");
-                leeftijd = Int32.Parse(Console.ReadLine());
-                if (leeftijd < 16)
+                do
                 {
-                    Console.WriteLine("Hebt u toestemming van uw ouders of voogd? (J/N)");
-                    toestemming = Console.ReadLine();
-                    while (toestemming.ToLower() != "j")
+                    Console.Write("Wat is uw leeftijd? ");
+                    leeftijd = Int32.Parse(Console.ReadLine());
+                    if (leeftijd < 16)
                     {
-                        Console.WriteLine("Vraag nogmaals toestemming van uw ouders of voogd? (J/N)");
+                        Console.WriteLine("Hebt u toestemming van uw ouders of voogd? (J/N)");
                         toestemming = Console.ReadLine();
                     }
-                }
+                } while (leeftijd >= 12 && leeftijd <= 130);
+
+                //Console.Write("Wat is uw leeftijd? ");
+                //leeftijd = Int32.Parse(Console.ReadLine());
+                //if (leeftijd < 16)
+                //{
+                //    Console.WriteLine("Hebt u toestemming van uw ouders of voogd? (J/N)");
+                //    toestemming = Console.ReadLine();
+                //    while (toestemming.ToLower() != "j")
+                //    {
+                //        Console.WriteLine("Vraag nogmaals toestemming van uw ouders of voogd? (J/N)");
+                //        toestemming = Console.ReadLine();
+                //    }
+                //}
+
                 Console.Write("Wat heeft u vandaag besteed? ");
                 bestedingen = Int32.Parse(Console.ReadLine());
                 Console.Write("Wilt u nog een persoon invoeren? (J/N) ");
