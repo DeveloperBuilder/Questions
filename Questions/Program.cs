@@ -53,7 +53,7 @@ namespace Questions
                         Console.WriteLine("Hebt u toestemming van uw ouders of voogd? (J/N)");
                         toestemming = Console.ReadLine();
                     }
-                } while (leeftijd <= 12 && leeftijd >= 130);
+                } while (leeftijd <= 12 && leeftijd >= 130 && toestemming != "j");
                 Console.Write("Wat heeft u vandaag besteed? ");
                 bestedingen = Int32.Parse(Console.ReadLine());
                 Console.Write("Wilt u nog een persoon invoeren? (J/N) ");
