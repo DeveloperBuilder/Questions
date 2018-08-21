@@ -62,7 +62,7 @@ namespace Questions
         public bool NogEenVraag()
         {
             Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
-            result = Console.ReadLine().ToLower() == "j";
+            bool result = Console.ReadLine().ToLower() == "j";
             return result;
         }
     }
