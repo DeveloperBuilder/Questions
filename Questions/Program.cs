@@ -29,7 +29,7 @@ namespace Questions
         •	Bestedingen zijn in euro’s, met minimaal een sprong van 5 euro (dus 5, 10, 15, etc) 
         •	Bestedingen moeten van vandaag zijn */
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             string geslacht;
             int leeftijd;
@@ -56,9 +56,14 @@ namespace Questions
                 } while (leeftijd <= 12 || leeftijd >= 130 || toestemming != "j");
                 Console.Write("Wat heeft u vandaag besteed? ");
                 bestedingen = Int32.Parse(Console.ReadLine());
-                Console.Write("Wilt u nog een persoon invoeren? (J/N) ");
-                antwoord = Console.ReadLine();
-            } while (antwoord.ToLower() == "j");
+            } while (NogEenVraag);
+        }
+
+        public bool NogEenVraag()
+        {
+            Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
+            result = Console.ReadLine().ToLower() == "j";
+            return result;
         }
     }
 }
