@@ -34,7 +34,6 @@ namespace Questions
             string geslacht;
             int leeftijd;
             int bestedingen;
-            string antwoord;
             string toestemming;
             do
             {
