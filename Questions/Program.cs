@@ -56,10 +56,10 @@ namespace Questions
                 } while (leeftijd <= 12 || leeftijd >= 130 || toestemming != "j");
                 Console.Write("Wat heeft u vandaag besteed? ");
                 bestedingen = Int32.Parse(Console.ReadLine());
-            } while (NogEenVraag);
+            } while (NogEenVraag());
         }
 
-        public bool NogEenVraag()
+        public static bool NogEenVraag()
         {
             Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
             bool result = Console.ReadLine().ToLower() == "j";
