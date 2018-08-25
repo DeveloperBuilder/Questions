@@ -51,8 +51,13 @@ namespace Questions
                     {
                         Console.WriteLine("Hebt u toestemming van uw ouders of voogd? (J/N)");
                     }
+                    else if (leeftijd <= 12 || leeftijd >= 130)
+                    {
+                        Console.WriteLine("Uw ingevoerde leeftijd komt niet in aanmerking voor de enquête");
+                        break;
+                    }
                     toestemming = Console.ReadLine();
-                } while (leeftijd <= 12 || leeftijd >= 130 || toestemming != "j");
+                } while (toestemming != "j");
                 Console.Write("Wat heeft u vandaag besteed? ");
                 bestedingen = Int32.Parse(Console.ReadLine());
             } while (NogEenVraag());
