@@ -54,9 +54,9 @@ namespace Questions
                     else if (leeftijd <= 12 || leeftijd >= 130)
                     {
                         Console.WriteLine("Uw ingevoerde leeftijd komt niet in aanmerking voor de enquête");
-                        break;
+                        continue;
                     }
-                    toestemming = Console.ReadLine();
+                    toestemming = Convert.ToString(Console.ReadLine());
                 } while (toestemming != "j");
                 Console.Write("Wat heeft u vandaag besteed? ");
                 bestedingen = Int32.Parse(Console.ReadLine());
