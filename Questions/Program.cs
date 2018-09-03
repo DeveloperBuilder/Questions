@@ -15,7 +15,6 @@ namespace Questions
         •	Antwoord wordt ingelezen en bewaard 
         •	Er wordt een vraag gesteld: Wat heeft u vandaag besteed? 
         •	Antwoord wordt ingelezen en bewaard 
-
         Als men voor “J” kiest, dan vraagt de applicatie opnieuw de drie vragen. Indien men voor “N” koos, dan stop de applicatie en toont de volgende gegevens in 3 tabellen.
         De doeleinde van de enquête is:
         a.	Gemiddelde bestedingen van de man en vrouw 
@@ -34,7 +33,7 @@ namespace Questions
             string geslacht;
             int leeftijd;
             int bestedingen;
-            string toestemming;
+            string toestemming = "";
             do
             {
                 Console.WriteLine("Beantwoordt de volgende 3 vragen:");
