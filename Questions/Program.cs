@@ -46,12 +46,13 @@ namespace Questions
                 {
                     Console.Write("Wat is uw leeftijd? ");
                     leeftijd = Int32.Parse(Console.ReadLine());
-                    if (leeftijd >= 12 || leeftijd <= 130)
+                    if (leeftijd >= 17 && leeftijd <= 130)
                     {
-                        if (leeftijd > 12 && leeftijd < 16)
-                        {
-                            Console.WriteLine("Hebt u toestemming van uw ouders of voogd? (J/N)");
-                        }
+                        break;
+                    }
+                    else if (leeftijd >= 12 && leeftijd <= 16)
+                    {
+                        Console.WriteLine("Hebt u toestemming van uw ouders of voogd? (J/N)");
                     }
                     else
                     {
