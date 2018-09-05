@@ -30,47 +30,43 @@ namespace Questions
 
         public static void Main(string[] args)
         {
-            string geslacht;
+            string geslacht = "";
             int leeftijd;
             int bestedingen;
-            string toestemming = "";
-            do
+            string toestemming = ""; 
+
+            do 
             {
-                Console.WriteLine("Beantwoordt de volgende 3 vragen:");
+                if (geslacht != "")
+                {
+                    Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
+                    if (Console.ReadLine().ToLower() == "n")
+                        break; 
+                }
+
+                Console.WriteLine("Beantwoord de volgende 3 vragen:");
                 do
                 {
                     Console.Write("Wat is uw geslacht? (m/v) ");
                     geslacht = Convert.ToString(Console.ReadLine());
                 } while (geslacht.ToLower() != "m" && geslacht.ToLower() != "v");
-                do
+
+                Console.Write("Wat is uw leeftijd? ");
+                leeftijd = Int32.Parse(Console.ReadLine());
+                if (leeftijd > 12 && leeftijd < 16)
                 {
-                    Console.Write("Wat is uw leeftijd? ");
-                    leeftijd = Int32.Parse(Console.ReadLine());
-                    if (leeftijd >= 17 && leeftijd <= 130)
-                    {
-                        break;
-                    }
-                    else if (leeftijd >= 12 && leeftijd <= 16)
-                    {
-                        Console.WriteLine("Hebt u toestemming van uw ouders of voogd? (J/N)");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Uw ingevoerde leeftijd komt niet in aanmerking voor de enquête");
-                        continue;
-                    }
-                    toestemming = Convert.ToString(Console.ReadLine());
-                } while (toestemming != "j");
+                    Console.Write("Hebt u toestemming van uw ouders of voogd? (J/N) ");
+                }
+                else
+                {
+                    Console.WriteLine("Uw ingevoerde leeftijd komt niet in aanmerking voor de enquête");
+                    continue; 
+                }
+                toestemming = Convert.ToString(Console.ReadLine());
+
                 Console.Write("Wat heeft u vandaag besteed? ");
                 bestedingen = Int32.Parse(Console.ReadLine());
-            } while (NogEenVraag());
-        }
-
-        public static bool NogEenVraag()
-        {
-            Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
-            bool result = Console.ReadLine().ToLower() == "j";
-            return result;
+            } while (true);
         }
     }
 }
