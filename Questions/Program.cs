@@ -70,8 +70,10 @@ namespace Questions
 
             public static bool NogEenVraag()
             {
+                bool antwoord;
+
                 Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
-                bool antwoord = Console.ReadLine().ToLower() == "j";
+                antwoord = Console.ReadLine().ToLower() == "j";
                 return antwoord;
             }
     }
