@@ -33,17 +33,10 @@ namespace Questions
             string geslacht = "";
             int leeftijd;
             int bestedingen;
-            string toestemming = ""; 
+            string toestemming = "";
 
-            do 
+            do
             {
-                if (geslacht != "")
-                {
-                    Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
-                    if (Console.ReadLine().ToLower() == "n")
-                        break; 
-                }
-
                 Console.WriteLine("Beantwoord de volgende 3 vragen:");
                 do
                 {
@@ -72,7 +65,14 @@ namespace Questions
                     continue;
                 }
 
-            } while (true);
+            } while (NogEenVraag());
         }
+
+            public static bool NogEenVraag()
+            {
+                Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
+                bool antwoord = Console.ReadLine().ToLower() == "j";
+                return antwoord;
+            }
     }
 }
