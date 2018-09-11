@@ -55,9 +55,18 @@ namespace Questions
                 {
                     if (leeftijd <= 16)
                     {
+                        NogmaalsToestemming:
                         Console.Write("Hebt u toestemming van uw ouders of voogd? (J/N) ");
                         toestemming = Convert.ToString(Console.ReadLine());
-                        if (toestemming.ToLower() != "j") continue;
+                        if (toestemming.ToLower() == "j");
+                        else if (toestemming.ToLower() == "n")
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            goto NogmaalsToestemming;
+                        }
                     }
 
                     Console.Write("Wat heeft u vandaag besteed? ");
