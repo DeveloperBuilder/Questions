@@ -42,6 +42,11 @@ namespace Questions
                 {
                     Console.Write("Wat is uw geslacht? (m/v) ");
                     geslacht = Convert.ToString(Console.ReadLine());
+                    if (geslacht.ToLower() != "m" && geslacht.ToLower() != "v")
+                    {
+                        Console.WriteLine("Uw ingevoerde geslacht is geen man of vrouw (m/v)");
+                        if (geslacht.ToLower() == "m" && geslacht.ToLower() == "v") continue;
+                    }
                 } while (geslacht.ToLower() != "m" && geslacht.ToLower() != "v");
 
                 Console.Write("Wat is uw leeftijd? ");
