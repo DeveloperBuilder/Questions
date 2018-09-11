@@ -31,8 +31,8 @@ namespace Questions
         public static void Main(string[] args)
         {
             string geslacht = "";
-            int leeftijd;
-            int bestedingen;
+            int leeftijd = 0;
+            int bestedingen = 0;
             string toestemming = "";
 
             do
@@ -65,6 +65,7 @@ namespace Questions
                         }
                         else
                         {
+                            Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
                             goto NogmaalsToestemming;
                         }
                     }
@@ -86,7 +87,7 @@ namespace Questions
             {
                 bool antwoord;
 
-                Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
+                Console.Write("Wilt u nog een persoon invoeren? (J/N) ");
                 antwoord = Console.ReadLine().ToLower() == "j";
                 return antwoord;
             }
