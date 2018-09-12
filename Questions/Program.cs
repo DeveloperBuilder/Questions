@@ -53,26 +53,24 @@ namespace Questions
                 leeftijd = Int32.Parse(Console.ReadLine());
                 if (leeftijd >= 12 && leeftijd <= 130)
                 {
+                    toestemming = "j";
                     if (leeftijd <= 16)
                     {
-                        NogmaalsToestemming:
-                        Console.Write("Hebt u toestemming van uw ouders of voogd? (J/N) ");
-                        toestemming = Convert.ToString(Console.ReadLine());
-                        if (toestemming.ToLower() == "j");
-                        else if (toestemming.ToLower() == "n")
+                        do
                         {
-                            continue;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
-                            goto NogmaalsToestemming;
-                        }
+                            if (toestemming.ToLower() != "j" && toestemming.ToLower() != "n")
+                            {
+                                Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
+                            }
+                            Console.Write("Hebt u toestemming van uw ouders of voogd? (J/N) ");
+                            toestemming = Convert.ToString(Console.ReadLine());
+                            if (toestemming.ToLower() == "n") continue;
+                        } while (toestemming.ToLower() != "j" && toestemming.ToLower() != "n");
                     }
+                    if (toestemming.ToLower() == "n") continue;
 
                     Console.Write("Wat heeft u vandaag besteed? ");
                     bestedingen = Int32.Parse(Console.ReadLine());
-
                 }
                 else
                 {
