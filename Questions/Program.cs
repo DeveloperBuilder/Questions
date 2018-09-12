@@ -64,7 +64,6 @@ namespace Questions
                             }
                             Console.Write("Hebt u toestemming van uw ouders of voogd? (J/N) ");
                             toestemming = Convert.ToString(Console.ReadLine());
-                            if (toestemming.ToLower() == "n") continue;
                         } while (toestemming.ToLower() != "j" && toestemming.ToLower() != "n");
                     }
                     if (toestemming.ToLower() == "n") continue;
