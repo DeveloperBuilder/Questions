@@ -82,11 +82,25 @@ namespace Questions
 
             public static bool NogEenVraag()
             {
-                bool antwoord;
+                bool antwoord = true;
 
                 Console.Write("Wilt u nog een persoon invoeren? (J/N) ");
-                antwoord = Console.ReadLine().ToLower() == "j";
-                return antwoord;
+            do
+            {
+                if (Console.ReadLine().ToLower() == "j" && Console.ReadLine().ToLower() == "n")
+                {
+                    if (Console.ReadLine().ToLower() == "n")
+                    {
+                        return false;
+                    }
+                    continue;
+                }
+                else
+                {
+                    Console.WriteLine("De invoer is geen ja of nee (J/N)");
+                }
+            } while (Console.ReadLine().ToLower() != "j" && Console.ReadLine().ToLower() != "n");
+            return true;
             }
     }
 }
