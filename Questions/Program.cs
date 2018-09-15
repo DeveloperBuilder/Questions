@@ -40,17 +40,17 @@ namespace Questions
                 Console.WriteLine("Beantwoord de volgende 3 vragen:");
                 do
                 {
-                    Console.Write("Wat is uw geslacht? (m/v) ");
-                    geslacht = Convert.ToString(Console.ReadLine());
-                    if (geslacht.ToLower() != "m" && geslacht.ToLower() != "v")
+                    Console.WriteLine("Wat is uw geslacht? (m/v) ");
+                    geslacht = Convert.ToString(Console.ReadLine().Trim());
+                    if (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v")
                     {
                         Console.WriteLine("Uw ingevoerde geslacht is geen man of vrouw (m/v)");
-                        if (geslacht.ToLower() == "m" && geslacht.ToLower() == "v") continue;
+                        if (geslacht.ToLower().Trim() == "m" && geslacht.ToLower().Trim() == "v") continue;
                     }
-                } while (geslacht.ToLower() != "m" && geslacht.ToLower() != "v");
+                } while (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v");
 
-                Console.Write("Wat is uw leeftijd? ");
-                leeftijd = Int32.Parse(Console.ReadLine());
+                Console.WriteLine("Wat is uw leeftijd? ");
+                leeftijd = Int32.Parse(Console.ReadLine().Trim());
                 if (leeftijd >= 12 && leeftijd <= 130)
                 {
                     toestemming = "j";
@@ -58,18 +58,18 @@ namespace Questions
                     {
                         do
                         {
-                            if (toestemming.ToLower() != "j" && toestemming.ToLower() != "n")
+                            if (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n")
                             {
                                 Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
                             }
-                            Console.Write("Hebt u toestemming van uw ouders of voogd? (J/N) ");
-                            toestemming = Convert.ToString(Console.ReadLine());
-                        } while (toestemming.ToLower() != "j" && toestemming.ToLower() != "n");
+                            Console.WriteLine("Hebt u toestemming van uw ouders of voogd? (J/N) ");
+                            toestemming = Convert.ToString(Console.ReadLine().Trim());
+                        } while (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n");
                     }
-                    if (toestemming.ToLower() == "n") continue;
+                    if (toestemming.ToLower().Trim() == "n") continue;
 
-                    Console.Write("Wat heeft u vandaag besteed? ");
-                    bestedingen = Int32.Parse(Console.ReadLine());
+                    Console.WriteLine("Wat heeft u vandaag besteed? ");
+                    bestedingen = Int32.Parse(Console.ReadLine().Trim());
                 }
                 else
                 {
@@ -82,16 +82,16 @@ namespace Questions
 
             public static bool NogEenVraag()
             {
-                bool antwoord = true;
+                bool antwoord = false;
 
-                Console.Write("Wilt u nog een persoon invoeren? (J/N) ");
+                Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
             do
             {
-                if (Console.ReadLine().ToLower() == "j" && Console.ReadLine().ToLower() == "n")
+                if (Console.ReadLine().ToLower().Trim() == "j" && Console.ReadLine().ToLower().Trim() == "n")
                 {
-                    if (Console.ReadLine().ToLower() == "n")
+                    if (Console.ReadLine().ToLower().Trim() == "n")
                     {
-                        return false;
+                        antwoord = false;
                     }
                     continue;
                 }
@@ -99,8 +99,8 @@ namespace Questions
                 {
                     Console.WriteLine("De invoer is geen ja of nee (J/N)");
                 }
-            } while (Console.ReadLine().ToLower() != "j" && Console.ReadLine().ToLower() != "n");
-            return true;
+            } while (Console.ReadLine().ToLower().Trim() != "j" && Console.ReadLine().ToLower().Trim() != "n");
+            return antwoord;
             }
     }
 }
