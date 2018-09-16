@@ -82,17 +82,21 @@ namespace Questions
 
             public static bool NogEenVraag()
             {
-                bool antwoord = false;
+                bool GaanWeVerder = false;
+                string antwoord = "";
 
                 Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
+                antwoord = Console.ReadLine();
             do
             {
-                if (Console.ReadLine().ToLower().Trim() == "j" && Console.ReadLine().ToLower().Trim() == "n")
+                if (Console.ReadLine().ToLower().Trim() == "j" || Console.ReadLine().ToLower().Trim() == "n")
                 {
                     if (Console.ReadLine().ToLower().Trim() == "n")
                     {
-                        antwoord = false;
+                        GaanWeVerder = false;
+                        break;
                     }
+                    GaanWeVerder = true;
                     continue;
                 }
                 else
@@ -100,7 +104,7 @@ namespace Questions
                     Console.WriteLine("De invoer is geen ja of nee (J/N)");
                 }
             } while (Console.ReadLine().ToLower().Trim() != "j" && Console.ReadLine().ToLower().Trim() != "n");
-            return antwoord;
+            return GaanWeVerder;
             }
     }
 }
