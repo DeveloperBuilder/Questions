@@ -97,7 +97,7 @@ namespace Questions
                         break;
                     }
                     GaanWeVerder = true;
-                    continue;
+                    break;
                 }
                 else
                 {
