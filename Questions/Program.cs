@@ -70,6 +70,10 @@ namespace Questions
 
                     Console.WriteLine("Wat heeft u vandaag besteed? ");
                     bestedingen = Int32.Parse(Console.ReadLine().Trim());
+
+                    DateTime datumTijd = DateTime.Now;
+                    Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
+                    Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()}");
                 }
                 else
                 {
