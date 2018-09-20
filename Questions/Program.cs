@@ -32,7 +32,7 @@ namespace Questions
         {
             string geslacht = "";
             int leeftijd = 0;
-            int bestedingen = 0;
+            double bestedingen = 0;
             string toestemming = "";
 
             do
@@ -69,7 +69,7 @@ namespace Questions
                     if (toestemming.ToLower().Trim() == "n") continue;
 
                     Console.WriteLine("Wat heeft u vandaag besteed? ");
-                    bestedingen = Int32.Parse(Console.ReadLine().Trim());
+                    bestedingen = Double.Parse(Console.ReadLine().Trim());
 
                     DateTime datumTijd = DateTime.Now;
                     Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
