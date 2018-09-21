@@ -15,11 +15,13 @@ namespace Questions
         •	Antwoord wordt ingelezen en bewaard 
         •	Er wordt een vraag gesteld: Wat heeft u vandaag besteed? 
         •	Antwoord wordt ingelezen en bewaard 
+
         Als men voor “J” kiest, dan vraagt de applicatie opnieuw de drie vragen. Indien men voor “N” koos, dan stop de applicatie en toont de volgende gegevens in 3 tabellen.
         De doeleinde van de enquête is:
         a.	Gemiddelde bestedingen van de man en vrouw 
         b.	Mediaan bestedingen van de man en vrouw 
         c.	Alle gegevens weergeven van de hoogste bestedingen van de man en vrouw 
+
         Er moeten rekening gehouden met de volgende punten.
         •	Geen namen in Arabisch, Chinese karakters, etc 
         •	Geen negatieve leeftijd en leeftijd tussen 12 jaar en 130 jaar 
@@ -67,9 +69,16 @@ namespace Questions
                     }
                     if (toestemming.ToLower().Trim() == "n") continue;
 
-                    Console.WriteLine("Wat heeft u vandaag besteed? ");
+                    Console.WriteLine("Wat heeft u vandaag besteed? (minstens 5 euro)");
                     bestedingen = Double.Parse(Console.ReadLine().Trim());
-
+                    if (bestedingen < 5)
+                    {
+                        Console.WriteLine(Math.Round(bestedingen / 5) * 5);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                     DateTime datumTijd = DateTime.Now;
                     Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
                     Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()} uur");
