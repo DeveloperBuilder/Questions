@@ -40,12 +40,11 @@ namespace Questions
                 Console.WriteLine("Beantwoord de volgende 3 vragen:");
                 do
                 {
-                    Console.WriteLine("Wat is uw geslacht? (m/v) ");
+                    Console.WriteLine("Wat is uw geslacht? (M/V) ");
                     geslacht = Convert.ToString(Console.ReadLine().Trim());
                     if (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v")
                     {
-                        Console.WriteLine("Uw ingevoerde geslacht is geen man of vrouw (m/v)");
-                        if (geslacht.ToLower().Trim() == "m" && geslacht.ToLower().Trim() == "v") continue;
+                        Console.WriteLine("Uw ingevoerde geslacht is geen man of vrouw (M/V)");
                     }
                 } while (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v");
 
@@ -73,7 +72,7 @@ namespace Questions
 
                     DateTime datumTijd = DateTime.Now;
                     Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
-                    Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()}");
+                    Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()} uur");
                 }
                 else
                 {
