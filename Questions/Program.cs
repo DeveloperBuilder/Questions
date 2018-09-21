@@ -71,17 +71,25 @@ namespace Questions
 
                     Console.WriteLine("Wat heeft u vandaag besteed? (minstens 5 euro)");
                     bestedingen = Double.Parse(Console.ReadLine().Trim());
-                    if (bestedingen < 5)
+                    if (bestedingen > 0)
                     {
-                        Console.WriteLine(Math.Round(bestedingen / 5) * 5);
+                        if (bestedingen > 5)
+                        {
+                            Console.WriteLine(Math.Round(bestedingen / 5) * 5);
+
+                            DateTime datumTijd = DateTime.Now;
+                            Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
+                            Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()} uur");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Uw bedrag is kleiner dan 5 euro");
+                            continue;
+                        }
                     }
-                    else
-                    {
-                        continue;
-                    }
-                    DateTime datumTijd = DateTime.Now;
-                    Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
-                    Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()} uur");
+
+
+
                 }
                 else
                 {
