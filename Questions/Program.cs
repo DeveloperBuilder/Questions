@@ -9,38 +9,52 @@ namespace Questions
     class Program
     {
         /*•	De applicatie start op 
-        •	Er wordt een vraag gesteld: Wat is uw geslacht? 
+        •	Er wordt een vraag gesteld: Wat is uw geslacht? (M/V)? 
         •	Antwoord wordt ingelezen en bewaard 
         •	Er wordt een vraag gesteld: Wat is uw leeftijd? 
         •	Antwoord wordt ingelezen en bewaard 
-        •	Er wordt een vraag gesteld: Wat heeft u vandaag besteed? 
+        •	Er wordt een vraag gesteld: Wat heeft u vandaag in het winkelcentrum besteed aan mode? (minstens 5 euro)? 
         •	Antwoord wordt ingelezen en bewaard 
+        •	Er wordt een vraag gesteld: Wat is uw jaarinkomen?
+        •	Antwoord wordt ingelezen en bewaard
+        •	Enzovoort
 
-        Als men voor “J” kiest, dan vraagt de applicatie opnieuw de drie vragen. Indien men voor “N” koos, dan stop de applicatie en toont de volgende gegevens in 1 tabel.
+        Als men voor “J” kiest, dan vraagt de applicatie opnieuw de vier vragen. Indien men voor “N” koos, dan stop de applicatie en toont de volgende gegevens in een staafdiagram en een tabel.
         De doeleinde van de enquête is:
         a.	Gemiddelde bestedingen van de man en vrouw 
         b.	Mediaan bestedingen van de man en vrouw 
         c.	Alle gegevens weergeven van de hoogste bestedingen van de man en vrouw 
-        d.  Sorteer gemiddelde, mediaan, bestedingen op leeftijd, categorie
+        d.  De aantal deelnemers moeten in de tabel voorkomen
+        e.  De nul bedragen, geen toestemming en geen bestedingen moeten uitgefilterd worden
+        e.  Sorteer gemiddelde, mediaan, bestedingen op leeftijd, categorie, jaarinkomen
+            Belastingschijf 	Loon (jaarbasis) 	
+            schijf 1 	        Vanaf € 0 t/m € 20.142 	
+            schijf 2 	        Vanaf € 20.143 t/m € 34.404 	
+            schijf 3 	        Vanaf € 34.405 t/m € 68.507 	
+            schijf 4 	        Meer dan € 68.507
 
         Er moeten rekening gehouden met de volgende punten.
         •	Geen namen in Arabisch, Chinese karakters, etc 
         •	Geen negatieve leeftijd en leeftijd tussen 12 jaar en 130 jaar 
         •	Leeftijd onder 16 jaar moeten toestemming krijgen van ouders of voogd doormiddel van een pop-up 
         •	Geslacht kan alleen man of vrouw zijn, geen gender neutraal 
-        •	Bestedingen zijn in euro’s, met minimaal een sprong van 5 euro (dus 5, 10, 15, etc) 
-        •	Bestedingen moeten van vandaag zijn */
+        •	Bestedingen zijn in euro’s, vanaf 0 euro met bedragen twee decimalen achter de komma's
+        •	Bestedingen moeten van vandaag zijn 
+        *   Mode onderverdelen in kleding en schoenen
+        *   Jaarinkomen in hele getallen en verdeeld in diagram en tabel */
 
         public static void Main(string[] args)
         {
             string geslacht = "";
             int leeftijd = 0;
-            double bestedingen = 0;
+            string bestedingen = "";
             string toestemming = "";
+            double kleding = 0;
+            double schoenen = 0;
 
             do
             {
-                Console.WriteLine("Beantwoordt de volgende 3 vragen:");
+                Console.WriteLine("Beantwoordt de volgende 4 vragen:");
                 do
                 {
                     Console.WriteLine("Wat is uw geslacht? (M/V) ");
@@ -70,26 +84,35 @@ namespace Questions
                     }
                     if (toestemming.ToLower().Trim() == "n") continue;
 
-                    Console.WriteLine("Wat heeft u vandaag besteed? (minstens 5 euro)");
-                    bestedingen = Double.Parse(Console.ReadLine().Trim());
-                    if (bestedingen >= 0)
+                    do
                     {
-                        if (bestedingen >= 5)
-                        {
-                            Console.WriteLine($"Het ingevoerde bedrag wordt afgerond: {Math.Round(bestedingen / 5) * 5} euro");
+                        Console.WriteLine("Heeft u vandaag bestedingen aan mode (kleding en/of schoenen) in het winkelcentrum gedaan? (J/N)");
+                        bestedingen = Console.ReadLine().Trim();
 
+                        if (bestedingen.ToLower().Trim() == "j")
+                        {
                             DateTime datumTijd = DateTime.Now;
                             Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
                             Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()} uur");
+
+                            Console.WriteLine("Hoeveel heeft u aan kleding uitbesteed?");
+                            kleding = double.Parse(Console.ReadLine());
+
+                            Console.WriteLine("Hoeveel heeft u aan schoenen uitbesteed?");
+                            schoenen = double.Parse(Console.ReadLine());
+                        }
+                        else if (bestedingen.ToLower().Trim() == "n")
+                        {
+                            Console.WriteLine("Bedankt voor uw deelname");
+                            continue;
                         }
                         else
                         {
-                            Console.WriteLine("Het bedrag is kleiner dan 5 euro");
-                            continue;
+                            Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
                         }
-                    }
-
+                    } while (bestedingen.ToLower().Trim() != "j" && bestedingen.ToLower().Trim() != "n");
                 }
+
                 else
                 {
                     Console.WriteLine("De ingevoerde leeftijd komt niet in aanmerking voor de enquête");
