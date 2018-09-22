@@ -16,8 +16,8 @@ namespace Questions
         •	Er wordt een vraag gesteld: Wat heeft u vandaag besteed? 
         •	Antwoord wordt ingelezen en bewaard 
 
-        Als men voor “J” kiest, dan vraagt de applicatie opnieuw de drie vragen. Indien men voor “N” koos, dan stop de applicatie en toont de volgende gegevens in 3 tabellen.
-        De doeleinde van de enquête is (onderstaande requirements moeten in tabel worden opgenomen):
+        Als men voor “J” kiest, dan vraagt de applicatie opnieuw de drie vragen. Indien men voor “N” koos, dan stop de applicatie en toont de volgende gegevens in 1 tabel.
+        De doeleinde van de enquête is:
         a.	Gemiddelde bestedingen van de man en vrouw 
         b.	Mediaan bestedingen van de man en vrouw 
         c.	Alle gegevens weergeven van de hoogste bestedingen van de man en vrouw 
