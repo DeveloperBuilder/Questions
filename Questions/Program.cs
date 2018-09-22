@@ -17,10 +17,11 @@ namespace Questions
         •	Antwoord wordt ingelezen en bewaard 
 
         Als men voor “J” kiest, dan vraagt de applicatie opnieuw de drie vragen. Indien men voor “N” koos, dan stop de applicatie en toont de volgende gegevens in 3 tabellen.
-        De doeleinde van de enquête is:
+        De doeleinde van de enquête is (onderstaande requirements moeten in tabel worden opgenomen):
         a.	Gemiddelde bestedingen van de man en vrouw 
         b.	Mediaan bestedingen van de man en vrouw 
         c.	Alle gegevens weergeven van de hoogste bestedingen van de man en vrouw 
+        d.  Sorteer gemiddelde, mediaan, bestedingen op leeftijd, categorie
 
         Er moeten rekening gehouden met de volgende punten.
         •	Geen namen in Arabisch, Chinese karakters, etc 
@@ -39,14 +40,14 @@ namespace Questions
 
             do
             {
-                Console.WriteLine("Beantwoord de volgende 3 vragen:");
+                Console.WriteLine("Beantwoordt de volgende 3 vragen:");
                 do
                 {
                     Console.WriteLine("Wat is uw geslacht? (M/V) ");
                     geslacht = Convert.ToString(Console.ReadLine().Trim());
                     if (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v")
                     {
-                        Console.WriteLine("De ingevoerde geslacht is geen man of vrouw (M/V)");
+                        Console.WriteLine("Het ingevoerde geslacht is geen man of vrouw (M/V)");
                     }
                 } while (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v");
 
@@ -63,7 +64,7 @@ namespace Questions
                             {
                                 Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
                             }
-                            Console.WriteLine("Hebt u toestemming van uw ouders of voogd? (J/N) ");
+                            Console.WriteLine("Heeft u toestemming van uw ouders of voogd? (J/N) ");
                             toestemming = Convert.ToString(Console.ReadLine().Trim());
                         } while (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n");
                     }
@@ -71,11 +72,11 @@ namespace Questions
 
                     Console.WriteLine("Wat heeft u vandaag besteed? (minstens 5 euro)");
                     bestedingen = Double.Parse(Console.ReadLine().Trim());
-                    if (bestedingen > 0)
+                    if (bestedingen >= 0)
                     {
-                        if (bestedingen > 5)
+                        if (bestedingen >= 5)
                         {
-                            Console.WriteLine($"Het ingevoerde bedrag wordt afgerond naar: {Math.Round(bestedingen / 5) * 5} euro");
+                            Console.WriteLine($"Het ingevoerde bedrag wordt afgerond: {Math.Round(bestedingen / 5) * 5} euro");
 
                             DateTime datumTijd = DateTime.Now;
                             Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
@@ -119,7 +120,7 @@ namespace Questions
                 }
                 else
                 {
-                    Console.WriteLine("De invoer is geen ja of nee (J/N)");
+                    Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
                 }
             } while (antwoord.ToLower().Trim() != "j" && antwoord.ToLower().Trim() != "n");
             return GaanWeVerder;
