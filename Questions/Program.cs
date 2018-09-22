@@ -75,7 +75,7 @@ namespace Questions
                     {
                         if (bestedingen > 5)
                         {
-                            Console.WriteLine($"Uw ingevoerde bedrag wordt afgerond naar: {Math.Round(bestedingen / 5) * 5} euro");
+                            Console.WriteLine($"Het ingevoerde bedrag wordt afgerond naar: {Math.Round(bestedingen / 5) * 5} euro");
 
                             DateTime datumTijd = DateTime.Now;
                             Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
@@ -83,7 +83,7 @@ namespace Questions
                         }
                         else
                         {
-                            Console.WriteLine("Uw bedrag is kleiner dan 5 euro");
+                            Console.WriteLine("Het bedrag is kleiner dan 5 euro");
                             continue;
                         }
                     }
