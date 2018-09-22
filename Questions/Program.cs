@@ -46,7 +46,7 @@ namespace Questions
                     geslacht = Convert.ToString(Console.ReadLine().Trim());
                     if (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v")
                     {
-                        Console.WriteLine("Uw ingevoerde geslacht is geen man of vrouw (M/V)");
+                        Console.WriteLine("De ingevoerde geslacht is geen man of vrouw (M/V)");
                     }
                 } while (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v");
 
@@ -91,7 +91,7 @@ namespace Questions
                 }
                 else
                 {
-                    Console.WriteLine("Uw ingevoerde leeftijd komt niet in aanmerking voor de enquête");
+                    Console.WriteLine("De ingevoerde leeftijd komt niet in aanmerking voor de enquête");
                     continue;
                 }
 
