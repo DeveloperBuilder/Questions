@@ -51,6 +51,7 @@ namespace Questions
             string toestemming = "";
             double kleding = 0;
             double schoenen = 0;
+            int jaarinkomen = 0;
 
             do
             {
@@ -87,7 +88,7 @@ namespace Questions
                     do
                     {
                         Console.WriteLine("Heeft u vandaag bestedingen aan mode (kleding en/of schoenen) in het winkelcentrum gedaan? (J/N)");
-                        bestedingen = Console.ReadLine().Trim();
+                        bestedingen = Console.ReadLine().ToLower().Trim();
 
                         if (bestedingen.ToLower().Trim() == "j")
                         {
@@ -111,6 +112,23 @@ namespace Questions
                             Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
                         }
                     } while (bestedingen.ToLower().Trim() != "j" && bestedingen.ToLower().Trim() != "n");
+                    if (bestedingen.ToLower().Trim() == "n") continue;
+
+                    do
+                    {
+                        Console.WriteLine("Wat is uw jaarinkomen?");
+                        jaarinkomen = Int32.Parse(Console.ReadLine().Trim());
+
+                        if (jaarinkomen >= 0)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            Console.WriteLine("De jaarinkomen is niet correct ingevuld");
+                        }
+                    } while (jaarinkomen <= 0);
+
                 }
 
                 else
