@@ -40,11 +40,13 @@ namespace Questions
         •	Geslacht kan alleen man of vrouw zijn, geen gender neutraal 
         •	Bestedingen zijn in euro’s, vanaf 0 euro met bedragen twee decimalen achter de komma's
         •	Bestedingen moeten van vandaag zijn 
-        *   Mode onderverdelen in kleding en schoenen
-        *   Jaarinkomen in hele getallen en verdeeld in diagram en tabel */
+        •   Mode onderverdelen in kleding en schoenen
+        •   Jaarinkomen in hele getallen en verdeeld in diagram en tabel */
 
         public static void Main(string[] args)
         {
+            Dictionary<string, string> Data = new Dictionary<string, string>();
+
             string geslacht = "";
             int leeftijd = 0;
             string bestedingen = "";
@@ -65,9 +67,11 @@ namespace Questions
                         Console.WriteLine("Het ingevoerde geslacht is geen man of vrouw (M/V)");
                     }
                 } while (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v");
+                Data.Add("geslacht", geslacht);
 
                 Console.WriteLine("Wat is uw leeftijd? ");
                 leeftijd = Int32.Parse(Console.ReadLine().Trim());
+                Data.Add("leeftijd", leeftijd.ToString());
                 if (leeftijd >= 12 && leeftijd <= 130)
                 {
                     toestemming = "j";
@@ -84,11 +88,12 @@ namespace Questions
                         } while (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n");
                     }
                     if (toestemming.ToLower().Trim() == "n") continue;
-
+                    Data.Add("toestemming", toestemming);
                     do
                     {
                         Console.WriteLine("Heeft u vandaag bestedingen aan mode (kleding en/of schoenen) in het winkelcentrum gedaan? (J/N)");
                         bestedingen = Console.ReadLine().ToLower().Trim();
+                        Data.Add("bestedingen", bestedingen);
 
                         if (bestedingen.ToLower().Trim() == "j")
                         {
@@ -98,9 +103,11 @@ namespace Questions
 
                             Console.WriteLine("Hoeveel heeft u aan kleding uitbesteed?");
                             kleding = double.Parse(Console.ReadLine());
+                            Data.Add("kleding", kleding.ToString());
 
                             Console.WriteLine("Hoeveel heeft u aan schoenen uitbesteed?");
                             schoenen = double.Parse(Console.ReadLine());
+                            Data.Add("schoenen", schoenen.ToString());
                         }
                         else if (bestedingen.ToLower().Trim() == "n")
                         {
@@ -112,12 +119,15 @@ namespace Questions
                             Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
                         }
                     } while (bestedingen.ToLower().Trim() != "j" && bestedingen.ToLower().Trim() != "n");
+                    Data.Add("bestedingen", bestedingen);
                     if (bestedingen.ToLower().Trim() == "n") continue;
+                    
 
                     do
                     {
                         Console.WriteLine("Wat is uw jaarinkomen?");
                         jaarinkomen = Int32.Parse(Console.ReadLine().Trim());
+                        
 
                         if (jaarinkomen >= 0)
                         {
@@ -127,8 +137,8 @@ namespace Questions
                         {
                             Console.WriteLine("De jaarinkomen is niet correct ingevuld");
                         }
-                    } while (jaarinkomen <= 0);
-
+                    } while (jaarinkomen < 0);
+                    Data.Add("jaarinkomen", jaarinkomen.ToString());
                 }
 
                 else
@@ -138,6 +148,14 @@ namespace Questions
                 }
 
             } while (NogEenVraag());
+
+            Console.WriteLine(" ");
+            Console.WriteLine($"|{"Data",-25}|{"Waarde",10}|");
+            foreach (var item in Data)
+            {
+                Console.WriteLine($"|{item.Key,-25}|{item.Value,10}");
+                Console.ReadLine();
+            }
         }
 
             public static bool NogEenVraag()
