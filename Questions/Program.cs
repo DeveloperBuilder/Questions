@@ -89,11 +89,11 @@ namespace Questions
                     }
                     if (toestemming.ToLower().Trim() == "n") continue;
                     Data.Add("toestemming", toestemming);
+                    
                     do
                     {
                         Console.WriteLine("Heeft u vandaag bestedingen aan mode (kleding en/of schoenen) in het winkelcentrum gedaan? (J/N)");
                         bestedingen = Console.ReadLine().ToLower().Trim();
-                        Data.Add("bestedingen", bestedingen);
 
                         if (bestedingen.ToLower().Trim() == "j")
                         {
@@ -152,10 +152,10 @@ namespace Questions
             Console.WriteLine(" ");
             Console.WriteLine($"|{"Data",-25}|{"Waarde",10}|");
             foreach (var item in Data)
-            {
+            
                 Console.WriteLine($"|{item.Key,-25}|{item.Value,10}");
                 Console.ReadLine();
-            }
+            
         }
 
             public static bool NogEenVraag()
