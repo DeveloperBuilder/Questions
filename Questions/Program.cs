@@ -45,7 +45,7 @@ namespace Questions
 
         public static void Main(string[] args)
         {
-            Dictionary<string, string> Data = new Dictionary<string, string>();
+            Dictionary<string, string> data = new Dictionary<string, string>();
 
             string geslacht = "";
             int leeftijd = 0;
@@ -58,20 +58,21 @@ namespace Questions
             do
             {
                 Console.WriteLine("Beantwoordt de volgende 4 vragen:");
-                do
-                {
-                    Console.WriteLine("Wat is uw geslacht? (M/V) ");
-                    geslacht = Convert.ToString(Console.ReadLine().Trim());
-                    if (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v")
-                    {
-                        Console.WriteLine("Het ingevoerde geslacht is geen man of vrouw (M/V)");
-                    }
-                } while (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v");
-                Data.Add("geslacht", geslacht);
+
+                geslacht = AchterhaalGeslacht(data);
+                //do
+                //{
+                //    Console.WriteLine("Wat is uw geslacht? (M/V) ");
+                //    geslacht = Convert.ToString(Console.ReadLine().Trim());
+                //    if (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v")
+                //    {
+                //        Console.WriteLine("Het ingevoerde geslacht is geen man of vrouw (M/V)");
+                //    }
+                //} while (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v");
+                //Data.Add("geslacht", geslacht);
 
                 Console.WriteLine("Wat is uw leeftijd? ");
                 leeftijd = Int32.Parse(Console.ReadLine().Trim());
-                Data.Add("leeftijd", leeftijd.ToString());
                 if (leeftijd >= 12 && leeftijd <= 130)
                 {
                     toestemming = "j";
@@ -88,7 +89,6 @@ namespace Questions
                         } while (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n");
                     }
                     if (toestemming.ToLower().Trim() == "n") continue;
-                    Data.Add("toestemming", toestemming);
                     
                     do
                     {
@@ -119,7 +119,6 @@ namespace Questions
                             Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
                         }
                     } while (bestedingen.ToLower().Trim() != "j" && bestedingen.ToLower().Trim() != "n");
-                    Data.Add("bestedingen", bestedingen);
                     if (bestedingen.ToLower().Trim() == "n") continue;
                     
 
@@ -138,7 +137,6 @@ namespace Questions
                             Console.WriteLine("De jaarinkomen is niet correct ingevuld");
                         }
                     } while (jaarinkomen < 0);
-                    Data.Add("jaarinkomen", jaarinkomen.ToString());
                 }
 
                 else
@@ -158,7 +156,38 @@ namespace Questions
             
         }
 
-            public static bool NogEenVraag()
+            private static string AchterhaalGeslacht(Dictionary<string, string> data)
+        {
+            string geslacht = "";
+            bool isValidGender = false;
+            do
+            {
+                Console.WriteLine("Wat is uw geslacht? (M/V) ");
+                geslacht = Convert.ToString(Console.ReadLine().Trim());
+                isValidGender = IsMaleOrFemale(geslacht);
+                if (!isValidGender)
+                {
+                    Console.WriteLine("Het ingevoerde geslacht is geen man of vrouw (M/V)");
+                }
+            } while (!isValidGender);
+            return geslacht;
+        }
+
+        private static bool IsMaleOrFemale(string geslacht)
+        {
+            if (geslacht.Contains("m"))
+            {
+                return true;
+            }
+
+            if (geslacht.Contains("v"))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool NogEenVraag()
             {
                 bool GaanWeVerder = false;
                 string antwoord = "";
