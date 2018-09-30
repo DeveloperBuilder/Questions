@@ -46,6 +46,7 @@ namespace Questions
         public static void Main(string[] args)
         {
             Dictionary<string, string> data = new Dictionary<string, string>();
+            Dictionary<int, int> data2 = new Dictionary<int, int>();
 
             string geslacht = "";
             int leeftijd = 0;
@@ -60,19 +61,13 @@ namespace Questions
                 Console.WriteLine("Beantwoordt de volgende 4 vragen:");
 
                 geslacht = AchterhaalGeslacht(data);
-                //do
-                //{
-                //    Console.WriteLine("Wat is uw geslacht? (M/V) ");
-                //    geslacht = Convert.ToString(Console.ReadLine().Trim());
-                //    if (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v")
-                //    {
-                //        Console.WriteLine("Het ingevoerde geslacht is geen man of vrouw (M/V)");
-                //    }
-                //} while (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v");
-                //Data.Add("geslacht", geslacht);
+
+                leeftijd = CorrecteLeeftijd(data2);
+
 
                 Console.WriteLine("Wat is uw leeftijd? ");
                 leeftijd = Int32.Parse(Console.ReadLine().Trim());
+                data.Add("leeftijd", leeftijd.ToString());
                 if (leeftijd >= 12 && leeftijd <= 130)
                 {
                     toestemming = "j";
@@ -103,11 +98,11 @@ namespace Questions
 
                             Console.WriteLine("Hoeveel heeft u aan kleding uitbesteed?");
                             kleding = double.Parse(Console.ReadLine());
-                            Data.Add("kleding", kleding.ToString());
+                            data.Add("kleding", kleding.ToString());
 
                             Console.WriteLine("Hoeveel heeft u aan schoenen uitbesteed?");
                             schoenen = double.Parse(Console.ReadLine());
-                            Data.Add("schoenen", schoenen.ToString());
+                            data.Add("schoenen", schoenen.ToString());
                         }
                         else if (bestedingen.ToLower().Trim() == "n")
                         {
@@ -149,7 +144,7 @@ namespace Questions
 
             Console.WriteLine(" ");
             Console.WriteLine($"|{"Data",-25}|{"Waarde",10}|");
-            foreach (var item in Data)
+            foreach (var item in data)
             
                 Console.WriteLine($"|{item.Key,-25}|{item.Value,10}");
                 Console.ReadLine();
@@ -163,7 +158,7 @@ namespace Questions
             do
             {
                 Console.WriteLine("Wat is uw geslacht? (M/V) ");
-                geslacht = Convert.ToString(Console.ReadLine().Trim());
+                geslacht = Convert.ToString(Console.ReadLine().ToLower().Trim());
                 isValidGender = IsMaleOrFemale(geslacht);
                 if (!isValidGender)
                 {
@@ -185,6 +180,66 @@ namespace Questions
                 return true;
             }
             return false;
+        }
+
+        private static int CorrecteLeeftijd(Dictionary<int, int> data2)
+        {
+            int leeftijd = 0;
+            bool isValidAge = false;
+            string toestemming = "";
+            do
+            {
+                Console.WriteLine("Wat is uw leeftijd? ");
+                leeftijd = Int32.Parse(Console.ReadLine().Trim());
+            } while (!isValidAge);
+            return leeftijd;
+        }
+
+        private static bool CheckAge(int leeftijd)
+        {
+            if (isRightAge)
+            {
+                return true;
+            }
+            if (AskPermission)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private static bool isRightAge(int leeftijd)
+        {
+            if (leeftijd >= 12 && leeftijd <= 130)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private static bool AskPermission(int leeftijd, string toestemming)
+        {
+            while (leeftijd >= 12 && leeftijd <= 16)
+            {
+                Console.WriteLine("Heeft u toestemming van uw ouders of voogd? (J/N) ");
+                do
+                {
+                    if (toestemming == "j")
+                    {
+                        return true;
+                    }
+                    if (toestemming == "n")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
+                    }
+
+                } while (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n");
+            }
+            return true;
         }
 
         public static bool NogEenVraag()
