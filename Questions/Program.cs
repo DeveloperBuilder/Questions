@@ -60,98 +60,14 @@ namespace Questions
             {
                 Console.WriteLine("Beantwoordt de volgende 4 vragen:");
 
-                geslacht = AchterhaalGeslacht(data);
+                geslacht = CheckGender(data);
 
-                leeftijd = CorrecteLeeftijd(data2);
-
-
-                Console.WriteLine("Wat is uw leeftijd? ");
-                leeftijd = Int32.Parse(Console.ReadLine().Trim());
-                data.Add("leeftijd", leeftijd.ToString());
-                if (leeftijd >= 12 && leeftijd <= 130)
-                {
-                    toestemming = "j";
-                    if (leeftijd <= 16)
-                    {
-                        do
-                        {
-                            if (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n")
-                            {
-                                Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
-                            }
-                            Console.WriteLine("Heeft u toestemming van uw ouders of voogd? (J/N) ");
-                            toestemming = Convert.ToString(Console.ReadLine().Trim());
-                        } while (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n");
-                    }
-                    if (toestemming.ToLower().Trim() == "n") continue;
-                    
-                    do
-                    {
-                        Console.WriteLine("Heeft u vandaag bestedingen aan mode (kleding en/of schoenen) in het winkelcentrum gedaan? (J/N)");
-                        bestedingen = Console.ReadLine().ToLower().Trim();
-
-                        if (bestedingen.ToLower().Trim() == "j")
-                        {
-                            DateTime datumTijd = DateTime.Now;
-                            Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
-                            Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()} uur");
-
-                            Console.WriteLine("Hoeveel heeft u aan kleding uitbesteed?");
-                            kleding = double.Parse(Console.ReadLine());
-                            data.Add("kleding", kleding.ToString());
-
-                            Console.WriteLine("Hoeveel heeft u aan schoenen uitbesteed?");
-                            schoenen = double.Parse(Console.ReadLine());
-                            data.Add("schoenen", schoenen.ToString());
-                        }
-                        else if (bestedingen.ToLower().Trim() == "n")
-                        {
-                            Console.WriteLine("Bedankt voor uw deelname");
-                            continue;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
-                        }
-                    } while (bestedingen.ToLower().Trim() != "j" && bestedingen.ToLower().Trim() != "n");
-                    if (bestedingen.ToLower().Trim() == "n") continue;
-                    
-
-                    do
-                    {
-                        Console.WriteLine("Wat is uw jaarinkomen?");
-                        jaarinkomen = Int32.Parse(Console.ReadLine().Trim());
-                        
-
-                        if (jaarinkomen >= 0)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            Console.WriteLine("De jaarinkomen is niet correct ingevuld");
-                        }
-                    } while (jaarinkomen < 0);
-                }
-
-                else
-                {
-                    Console.WriteLine("De ingevoerde leeftijd komt niet in aanmerking voor de enquête");
-                    continue;
-                }
+                leeftijd = CheckAge(data2);
 
             } while (NogEenVraag());
-
-            Console.WriteLine(" ");
-            Console.WriteLine($"|{"Data",-25}|{"Waarde",10}|");
-            foreach (var item in data)
-            
-                Console.WriteLine($"|{item.Key,-25}|{item.Value,10}");
-                Console.ReadLine();
-            
         }
 
-            private static string AchterhaalGeslacht(Dictionary<string, string> data)
+        private static string CheckGender(Dictionary<string, string> data)
         {
             string geslacht = "";
             bool isValidGender = false;
@@ -182,30 +98,17 @@ namespace Questions
             return false;
         }
 
-        private static int CorrecteLeeftijd(Dictionary<int, int> data2)
+        private static int CheckAge(Dictionary<int, int> data2)
         {
             int leeftijd = 0;
             bool isValidAge = false;
             string toestemming = "";
-            do
-            {
+
                 Console.WriteLine("Wat is uw leeftijd? ");
                 leeftijd = Int32.Parse(Console.ReadLine().Trim());
-            } while (!isValidAge);
-            return leeftijd;
-        }
+                isValidAge = isRightAge(leeftijd);
 
-        private static bool CheckAge(int leeftijd)
-        {
-            if (isRightAge)
-            {
-                return true;
-            }
-            if (AskPermission)
-            {
-                return true;
-            }
-            return false;
+            return leeftijd;
         }
 
         private static bool isRightAge(int leeftijd)
@@ -214,7 +117,11 @@ namespace Questions
             {
                 return true;
             }
-            return false;
+            else
+            {
+                Console.WriteLine("Bedankt voor uw deelname.");
+                return false;
+            }
         }
 
         private static bool AskPermission(int leeftijd, string toestemming)
@@ -230,22 +137,21 @@ namespace Questions
                     }
                     if (toestemming == "n")
                     {
-                        break;
+                        continue;
                     }
                     else
                     {
                         Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
                     }
-
                 } while (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n");
             }
             return true;
         }
 
         public static bool NogEenVraag()
-            {
-                bool GaanWeVerder = false;
-                string antwoord = "";
+        {
+            bool GaanWeVerder = false;
+            string antwoord = "";
 
             do
             {
@@ -267,6 +173,167 @@ namespace Questions
                 }
             } while (antwoord.ToLower().Trim() != "j" && antwoord.ToLower().Trim() != "n");
             return GaanWeVerder;
-            }
+        }
     }
+
+//    public static void Main(string[] args)
+//    {
+//        Dictionary<string, string> data = new Dictionary<string, string>();
+//        Dictionary<int, int> data2 = new Dictionary<int, int>();
+
+//        string geslacht = "";
+//        int leeftijd = 0;
+//        string bestedingen = "";
+//        string toestemming = "";
+//        double kleding = 0;
+//        double schoenen = 0;
+//        int jaarinkomen = 0;
+
+//        do
+//        {
+//            Console.WriteLine("Beantwoordt de volgende 4 vragen:");
+
+
+//            do
+//            {
+//                Console.WriteLine("Wat is uw geslacht? (M/V) ");
+//                geslacht = Convert.ToString(Console.ReadLine().Trim());
+//                if (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v")
+//                {
+//                    Console.WriteLine("Het ingevoerde geslacht is geen man of vrouw (M/V)");
+//                }
+//            } while (geslacht.ToLower().Trim() != "m" && geslacht.ToLower().Trim() != "v");
+
+
+//            Console.WriteLine("Wat is uw leeftijd? ");
+//            leeftijd = Int32.Parse(Console.ReadLine().Trim());
+//            data.Add("leeftijd", leeftijd.ToString());
+//            if (leeftijd >= 12 && leeftijd <= 130)
+//            {
+//                toestemming = "j";
+//                if (leeftijd <= 16)
+//                {
+//                    do
+//                    {
+//                        if (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n")
+//                        {
+//                            Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
+//                        }
+//                        Console.WriteLine("Heeft u toestemming van uw ouders of voogd? (J/N) ");
+//                        toestemming = Convert.ToString(Console.ReadLine().Trim());
+//                    } while (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n");
+//                }
+//                if (toestemming.ToLower().Trim() == "n") continue;
+
+//                do
+//                {
+//                    Console.WriteLine("Heeft u vandaag bestedingen aan mode (kleding en/of schoenen) in het winkelcentrum gedaan? (J/N)");
+//                    bestedingen = Console.ReadLine().ToLower().Trim();
+
+//                    if (bestedingen.ToLower().Trim() == "j")
+//                    {
+//                        DateTime datumTijd = DateTime.Now;
+//                        Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
+//                        Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()} uur");
+
+//                        Console.WriteLine("Hoeveel heeft u aan kleding uitbesteed?");
+//                        kleding = double.Parse(Console.ReadLine());
+//                        data.Add("kleding", kleding.ToString());
+
+//                        Console.WriteLine("Hoeveel heeft u aan schoenen uitbesteed?");
+//                        schoenen = double.Parse(Console.ReadLine());
+//                        data.Add("schoenen", schoenen.ToString());
+//                    }
+//                    else if (bestedingen.ToLower().Trim() == "n")
+//                    {
+//                        Console.WriteLine("Bedankt voor uw deelname");
+//                        continue;
+//                    }
+//                    else
+//                    {
+//                        Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
+//                    }
+//                } while (bestedingen.ToLower().Trim() != "j" && bestedingen.ToLower().Trim() != "n");
+//                if (bestedingen.ToLower().Trim() == "n") continue;
+
+
+//                do
+//                {
+//                    Console.WriteLine("Wat is uw jaarinkomen?");
+//                    jaarinkomen = Int32.Parse(Console.ReadLine().Trim());
+
+
+//                    if (jaarinkomen >= 0)
+//                    {
+//                        continue;
+//                    }
+//                    else
+//                    {
+//                        Console.WriteLine("De jaarinkomen is niet correct ingevuld");
+//                    }
+//                } while (jaarinkomen < 0);
+//            }
+
+//            else
+//            {
+//                Console.WriteLine("De ingevoerde leeftijd komt niet in aanmerking voor de enquête");
+//                continue;
+//            }
+
+//        } while (NogEenVraag());
+
+//        Console.WriteLine(" ");
+//        Console.WriteLine($"|{"Data",-25}|{"Waarde",10}|");
+//        foreach (var item in data)
+
+//            Console.WriteLine($"|{item.Key,-25}|{item.Value,10}");
+//        Console.ReadLine();
+
+//    }
+
+//    private static string AchterhaalGeslacht(Dictionary<string, string> data)
+//    {
+//        string geslacht = "";
+//        bool isValidGender = false;
+//        do
+//        {
+//            Console.WriteLine("Wat is uw geslacht? (M/V) ");
+//            geslacht = Convert.ToString(Console.ReadLine().ToLower().Trim());
+//            isValidGender = IsMaleOrFemale(geslacht);
+//            if (!isValidGender)
+//            {
+//                Console.WriteLine("Het ingevoerde geslacht is geen man of vrouw (M/V)");
+//            }
+//        } while (!isValidGender);
+//        return geslacht;
+//    }
+
+
+//    public static bool NogEenVraag()
+//    {
+//        bool GaanWeVerder = false;
+//        string antwoord = "";
+
+//        do
+//        {
+//            Console.WriteLine("Wilt u nog een persoon invoeren? (J/N) ");
+//            antwoord = Console.ReadLine();
+//            if (antwoord.ToLower().Trim() == "j" || antwoord.ToLower().Trim() == "n")
+//            {
+//                if (antwoord.ToLower().Trim() == "n")
+//                {
+//                    GaanWeVerder = false;
+//                    break;
+//                }
+//                GaanWeVerder = true;
+//                break;
+//            }
+//            else
+//            {
+//                Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
+//            }
+//        } while (antwoord.ToLower().Trim() != "j" && antwoord.ToLower().Trim() != "n");
+//        return GaanWeVerder;
+//    }
+//}
 }
