@@ -45,8 +45,11 @@ namespace Questions
 
         public static void Main(string[] args)
         {
-            Dictionary<string, string> data = new Dictionary<string, string>();
-            Dictionary<int, int> data2 = new Dictionary<int, int>();
+            List<Dictionary<string, string>> dataList = new List<Dictionary<string, string>>();
+            List<string> Persons = new List<string>();
+            List<Dictionary<int, int>> data2List = new List<Dictionary<int, int>>();
+            List<int> Persons2 = new List<int>();
+            int index = 0;
 
             string geslacht = "";
             int leeftijd = 0;
@@ -58,23 +61,39 @@ namespace Questions
 
             do
             {
+                dataList.Add(new Dictionary<string, string>());
+                index = Persons.Count - 1;
                 Console.WriteLine("Beantwoordt de volgende 4 vragen:");
 
-                geslacht = CheckGender(data);
+                geslacht = CheckGender(dataList[index]);
 
-                leeftijd = CheckAge(data2);
+                leeftijd = CheckAge(data2List[index]);
 
             } while (NogEenVraag());
+
+            for (int i = 0; i <= index; i++)
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Gegevens van {Persons[i]}:");
+                Console.WriteLine($"|{"Data",-25}|{"Waarde",10}|");
+                foreach (var item in dataList[i])
+                    Console.WriteLine($"|{item.Key,-25}|{item.Value,10}|");
+            }
+            Console.ReadLine();
         }
 
-        private static string CheckGender(Dictionary<string, string> data)
+
+
+        private static string CheckGender(Dictionary<string, string> dataList)
         {
             string geslacht = "";
             bool isValidGender = false;
+            string index = "";
             do
             {
                 Console.WriteLine("Wat is uw geslacht? (M/V) ");
                 geslacht = Convert.ToString(Console.ReadLine().ToLower().Trim());
+                dataList[index].Contains("geslacht");
                 isValidGender = IsMaleOrFemale(geslacht);
                 if (!isValidGender)
                 {
@@ -98,7 +117,7 @@ namespace Questions
             return false;
         }
 
-        private static int CheckAge(Dictionary<int, int> data2)
+        private static int CheckAge(Dictionary<int, int> data2List)
         {
             int leeftijd = 0;
             bool isValidAge = false;
@@ -107,7 +126,6 @@ namespace Questions
                 Console.WriteLine("Wat is uw leeftijd? ");
                 leeftijd = Int32.Parse(Console.ReadLine().Trim());
                 isValidAge = isRightAge(leeftijd);
-
             return leeftijd;
         }
 
