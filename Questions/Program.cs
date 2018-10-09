@@ -47,12 +47,11 @@ namespace Questions
         {
             List<Dictionary<string, string>> dataList = new List<Dictionary<string, string>>();
             List<string> Persons = new List<string>();
-            List<Dictionary<int, int>> data2List = new List<Dictionary<int, int>>();
-            List<int> Persons2 = new List<int>();
             int index = 0;
 
             string geslacht = "";
             int leeftijd = 0;
+            string naam = "";
             string bestedingen = "";
             string toestemming = "";
             double kleding = 0;
@@ -62,12 +61,16 @@ namespace Questions
             do
             {
                 dataList.Add(new Dictionary<string, string>());
-                index = Persons.Count - 1;
+                index = dataList.Count - 1;
                 Console.WriteLine("Beantwoordt de volgende 4 vragen:");
 
-                geslacht = CheckGender(dataList[index]);
+                Console.WriteLine("Wat is uw naam? ");
+                naam = Convert.ToString(Console.ReadLine().Trim());
+                Persons.Add(naam);
 
-                leeftijd = CheckAge(data2List[index]);
+                geslacht = CheckGender(dataList);
+
+                leeftijd = CheckAge(dataList);
 
             } while (NogEenVraag());
 
@@ -77,27 +80,30 @@ namespace Questions
                 Console.WriteLine($"Gegevens van {Persons[i]}:");
                 Console.WriteLine($"|{"Data",-25}|{"Waarde",10}|");
                 foreach (var item in dataList[i])
-                    Console.WriteLine($"|{item.Key,-25}|{item.Value,10}|");
+                Console.WriteLine($"|{item.Key,-25}|{item.Value,10}|");
             }
             Console.ReadLine();
         }
 
 
 
-        private static string CheckGender(Dictionary<string, string> dataList)
+        private static string CheckGender(List<Dictionary<string, string>> dataList)
         {
             string geslacht = "";
             bool isValidGender = false;
-            string index = "";
+            int index = dataList.Count - 1;
             do
             {
                 Console.WriteLine("Wat is uw geslacht? (M/V) ");
                 geslacht = Convert.ToString(Console.ReadLine().ToLower().Trim());
-                dataList[index].Contains("geslacht");
                 isValidGender = IsMaleOrFemale(geslacht);
                 if (!isValidGender)
                 {
                     Console.WriteLine("Het ingevoerde geslacht is geen man of vrouw (M/V)");
+                }
+                else
+                {
+                    dataList[index]["geslacht"] = geslacht;
                 }
             } while (!isValidGender);
             return geslacht;
@@ -105,27 +111,26 @@ namespace Questions
 
         private static bool IsMaleOrFemale(string geslacht)
         {
-            if (geslacht.Contains("m"))
-            {
-                return true;
-            }
-
-            if (geslacht.Contains("v"))
-            {
-                return true;
-            }
-            return false;
+            return geslacht.ToLower().Trim() == "m" || geslacht.ToLower().Trim() == "v";
         }
 
-        private static int CheckAge(Dictionary<int, int> data2List)
+        private static int CheckAge(List<Dictionary<string, string>> dataList)
         {
+            int index = dataList.Count - 1;
             int leeftijd = 0;
             bool isValidAge = false;
+            bool permission = false;
             string toestemming = "";
 
-                Console.WriteLine("Wat is uw leeftijd? ");
-                leeftijd = Int32.Parse(Console.ReadLine().Trim());
-                isValidAge = isRightAge(leeftijd);
+            Console.WriteLine("Wat is uw leeftijd? ");
+            leeftijd = Int32.Parse(Console.ReadLine().Trim());
+            isValidAge = isRightAge(leeftijd);
+            dataList[index]["leeftijd"] = leeftijd.ToString();
+            if (isValidAge)
+            {
+                permission = AskPermission(leeftijd, toestemming);
+                dataList[index]["toestemming"] = permission ? "j" : "n";
+            }
             return leeftijd;
         }
 
@@ -146,22 +151,22 @@ namespace Questions
         {
             while (leeftijd >= 12 && leeftijd <= 16)
             {
-                Console.WriteLine("Heeft u toestemming van uw ouders of voogd? (J/N) ");
+                bool isValidAnswer = false;
+
                 do
                 {
-                    if (toestemming == "j")
-                    {
-                        return true;
-                    }
-                    if (toestemming == "n")
-                    {
-                        continue;
-                    }
-                    else
+                    Console.WriteLine("Heeft u toestemming van uw ouders of voogd? (J/N) ");
+                    toestemming = Convert.ToString(Console.ReadLine().Trim());
+                    isValidAnswer = toestemming.ToLower().Trim() == "j" || toestemming.ToLower().Trim() == "n";
+                    if (!isValidAnswer)
                     {
                         Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
                     }
-                } while (toestemming.ToLower().Trim() != "j" && toestemming.ToLower().Trim() != "n");
+                    else
+                    {
+                        return toestemming == "j";
+                    }
+                } while (!isValidAnswer);
             }
             return true;
         }
@@ -177,12 +182,7 @@ namespace Questions
                 antwoord = Console.ReadLine();
                 if (antwoord.ToLower().Trim() == "j" || antwoord.ToLower().Trim() == "n")
                 {
-                    if (antwoord.ToLower().Trim() == "n")
-                    {
-                        GaanWeVerder = false;
-                        break;
-                    }
-                    GaanWeVerder = true;
+                    GaanWeVerder = antwoord.ToLower().Trim() == "j";
                     break;
                 }
                 else
