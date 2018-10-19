@@ -72,6 +72,8 @@ namespace Questions
 
                 leeftijd = CheckAge(dataList);
 
+                bestedingen = CheckPurchase(dataList);
+
             } while (NogEenVraag());
 
             for (int i = 0; i <= index; i++)
@@ -84,8 +86,6 @@ namespace Questions
             }
             Console.ReadLine();
         }
-
-
 
         private static string CheckGender(List<Dictionary<string, string>> dataList)
         {
@@ -169,6 +169,45 @@ namespace Questions
                 } while (!isValidAnswer);
             }
             return true;
+        }
+
+        public static string CheckPurchase(List<Dictionary<string, string>> dataList)
+        {
+            string bestedingen = "";
+
+            Console.WriteLine("Heeft u vandaag bestedingen aan mode (kleding en/of schoenen) in het winkelcentrum gedaan? (J/N)");
+            bestedingen = Console.ReadLine().ToLower().Trim();
+            if (bestedingen.ToLower().Trim() == "j")
+            {
+                DateTime datumTijd = DateTime.Now;
+                Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
+                Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()} uur");
+
+            }
+            else if (bestedingen.ToLower().Trim() == "n")
+            {
+                Console.WriteLine("Bedankt voor uw deelname");
+                return bestedingen;
+            }
+            else
+            {
+                Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
+            }
+            return bestedingen;
+        }
+
+        public static double BuyCloths(double kleding)
+        {
+            Console.WriteLine("Hoeveel heeft u aan kleding uitbesteed?");
+            kleding = double.Parse(Console.ReadLine());
+            return kleding;
+        }
+
+        public static double BuyShoes(double schoenen)
+        {
+            Console.WriteLine("Hoeveel heeft u aan schoenen uitbesteed?");
+            schoenen = double.Parse(Console.ReadLine());
+            return schoenen;
         }
 
         public static bool NogEenVraag()
