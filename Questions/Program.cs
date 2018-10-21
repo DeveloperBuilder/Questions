@@ -174,6 +174,7 @@ namespace Questions
         public static string CheckPurchase(List<Dictionary<string, string>> dataList)
         {
             string bestedingen = "";
+            int index = dataList.Count - 1;
 
             Console.WriteLine("Heeft u vandaag bestedingen aan mode (kleding en/of schoenen) in het winkelcentrum gedaan? (J/N)");
             bestedingen = Console.ReadLine().ToLower().Trim();
@@ -182,6 +183,7 @@ namespace Questions
                 DateTime datumTijd = DateTime.Now;
                 Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
                 Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()} uur");
+                dataList[index]["bestedingen"] = bestedingen.ToString();
 
             }
             else if (bestedingen.ToLower().Trim() == "n")
