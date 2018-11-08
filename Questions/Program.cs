@@ -64,8 +64,7 @@ namespace Questions
                 index = dataList.Count - 1;
                 Console.WriteLine("Beantwoordt de volgende 4 vragen:");
 
-                Console.WriteLine("Wat is uw naam? ");
-                naam = Convert.ToString(Console.ReadLine().Trim());
+                naam = CheckName(dataList);
                 Persons.Add(naam);
 
                 geslacht = CheckGender(dataList);
@@ -85,6 +84,17 @@ namespace Questions
                 Console.WriteLine($"|{item.Key,-25}|{item.Value,10}|");
             }
             Console.ReadLine();
+        }
+
+        private static string CheckName(List<Dictionary<string,string>> dataList)
+        {
+            string naam = "";
+            int index = dataList.Count - 1;
+
+            Console.WriteLine("Wat is uw naam? ");
+            naam = Convert.ToString(Console.ReadLine().Trim());
+            dataList[index]["naam"] = naam.ToString();
+            return naam;
         }
 
         private static string CheckGender(List<Dictionary<string, string>> dataList)
@@ -130,6 +140,10 @@ namespace Questions
             {
                 permission = AskPermission(leeftijd, toestemming);
                 dataList[index]["toestemming"] = permission ? "j" : "n";
+                if (permission)
+                {
+                    string bestedingen = CheckPurchase(dataList);
+                }
             }
             return leeftijd;
         }
@@ -138,7 +152,9 @@ namespace Questions
         {
             if (leeftijd >= 12 && leeftijd <= 130)
             {
-                return true;
+                if (leeftijd <= 16)
+                    return true;
+                    else return false;
             }
             else
             {
@@ -161,10 +177,11 @@ namespace Questions
                     if (!isValidAnswer)
                     {
                         Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
+                        return false;
                     }
                     else
                     {
-                        return toestemming == "j";
+                        return toestemming == "n";
                     }
                 } while (!isValidAnswer);
             }
@@ -175,38 +192,58 @@ namespace Questions
         {
             string bestedingen = "";
             int index = dataList.Count - 1;
+            bool isValidAnswer = false;
+            do
+            {
+                Console.WriteLine("Heeft u vandaag bestedingen aan mode (kleding en/of schoenen) in het winkelcentrum gedaan? (J/N)");
+                bestedingen = Console.ReadLine().ToLower().Trim();
+                isValidAnswer = bestedingen.ToLower().Trim() == "j" || bestedingen.ToLower().Trim() == "n";
+                if (isValidAnswer)
+                {
+                    if (bestedingen.ToLower().Trim() == "j")
+                    {
+                        DateTime DatumTijd = DateTime.Now;
+                        var Datum = DatumTijd.ToShortDateString();
+                        var Tijd = DatumTijd.ToShortTimeString();
 
-            Console.WriteLine("Heeft u vandaag bestedingen aan mode (kleding en/of schoenen) in het winkelcentrum gedaan? (J/N)");
-            bestedingen = Console.ReadLine().ToLower().Trim();
-            if (bestedingen.ToLower().Trim() == "j")
-            {
-                DateTime datumTijd = DateTime.Now;
-                Console.WriteLine($"Datum: {datumTijd.ToLongDateString()}");
-                Console.WriteLine($"Tijd: {datumTijd.ToLongTimeString()} uur");
-                dataList[index]["bestedingen"] = bestedingen.ToString();
+                        Console.WriteLine($"Datum: {Datum}");
+                        dataList[index]["Datum"] = Datum;
+                        Console.WriteLine($"Tijd: {Tijd} uur");
+                        dataList[index]["Tijd"] = Tijd;
+                        dataList[index]["bestedingen"] = bestedingen.ToString();
 
-            }
-            else if (bestedingen.ToLower().Trim() == "n")
-            {
-                Console.WriteLine("Bedankt voor uw deelname");
-                return bestedingen;
-            }
-            else
-            {
-                Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
-            }
+                    }
+                    if (bestedingen.ToLower().Trim() == "n")
+                    {
+                        Console.WriteLine("Bedankt voor uw deelname");
+                        break;
+                    }
+                    else
+                    {
+                        double clothes = BuyCloths();
+                        dataList[index]["bestedingen kleren"] = clothes.ToString();
+                        double shoes = BuyShoes();
+                        dataList[index]["bestedingen schoenen"] = shoes.ToString();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
+                }
+            } while (!isValidAnswer);
             return bestedingen;
         }
-
-        public static double BuyCloths(double kleding)
+        public static double BuyCloths()
         {
+            double kleding;
             Console.WriteLine("Hoeveel heeft u aan kleding uitbesteed?");
             kleding = double.Parse(Console.ReadLine());
             return kleding;
         }
 
-        public static double BuyShoes(double schoenen)
+        public static double BuyShoes()
         {
+            double schoenen;
             Console.WriteLine("Hoeveel heeft u aan schoenen uitbesteed?");
             schoenen = double.Parse(Console.ReadLine());
             return schoenen;
@@ -234,6 +271,7 @@ namespace Questions
             return GaanWeVerder;
         }
     }
+}
 
 //    public static void Main(string[] args)
 //    {
@@ -395,4 +433,3 @@ namespace Questions
 //        return GaanWeVerder;
 //    }
 //}
-}
