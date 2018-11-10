@@ -52,11 +52,6 @@ namespace Questions
             string geslacht = "";
             int leeftijd = 0;
             string naam = "";
-            string bestedingen = "";
-            string toestemming = "";
-            double kleding = 0;
-            double schoenen = 0;
-            int jaarinkomen = 0;
 
             do
             {
@@ -71,17 +66,22 @@ namespace Questions
 
                 leeftijd = CheckAge(dataList);
 
-                bestedingen = CheckPurchase(dataList);
-
             } while (NogEenVraag());
 
             for (int i = 0; i <= index; i++)
             {
-                Console.WriteLine();
-                Console.WriteLine($"Gegevens van {Persons[i]}:");
-                Console.WriteLine($"|{"Data",-25}|{"Waarde",10}|");
-                foreach (var item in dataList[i])
-                Console.WriteLine($"|{item.Key,-25}|{item.Value,10}|");
+                if (isRightAge(Int32.Parse(dataList[i]["leeftijd"])))
+                {
+                    if (dataList[i]["toestemming"] == "j")
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine($"Gegevens van {Persons[i]}:");
+                        Console.WriteLine($"|{"Data",-25}|{"Waarde",10}|");
+
+                        foreach (var item in dataList[i])
+                        Console.WriteLine($"|{item.Key,-25}|{item.Value,10}|");
+                    }
+                }
             }
             Console.ReadLine();
         }
@@ -145,6 +145,10 @@ namespace Questions
                     string bestedingen = CheckPurchase(dataList);
                 }
             }
+            else
+            {
+                Console.WriteLine("Bedankt voor uw deelname");
+            }
             return leeftijd;
         }
 
@@ -158,14 +162,13 @@ namespace Questions
             }
             else
             {
-                Console.WriteLine("Bedankt voor uw deelname.");
                 return false;
             }
         }
 
         private static bool AskPermission(int leeftijd, string toestemming)
         {
-            while (leeftijd >= 12 && leeftijd <= 16)
+            if (leeftijd >= 12 && leeftijd <= 16)
             {
                 bool isValidAnswer = false;
 
@@ -177,11 +180,10 @@ namespace Questions
                     if (!isValidAnswer)
                     {
                         Console.WriteLine("Uw invoer is geen ja of nee (J/N)");
-                        return false;
                     }
                     else
                     {
-                        return toestemming == "n";
+                        return toestemming == "j";
                     }
                 } while (!isValidAnswer);
             }
