@@ -68,12 +68,14 @@ namespace Questions
 
             } while (NogEenVraag());
 
+            bool TabelLeeg = true;
             for (int i = 0; i <= index; i++)
             {
                 if (isRightAge(Int32.Parse(dataList[i]["leeftijd"])))
                 {
                     if (dataList[i]["toestemming"] == "j")
                     {
+                        TabelLeeg = false;
                         Console.WriteLine();
                         Console.WriteLine($"Gegevens van {Persons[i]}:");
                         Console.WriteLine($"|{"Data",-25}|{"Waarde",10}|");
@@ -83,7 +85,7 @@ namespace Questions
                     }
                 }
             }
-            Console.ReadLine();
+            if (!TabelLeeg) Console.ReadLine();
         }
 
         private static string CheckName(List<Dictionary<string,string>> dataList)
@@ -145,10 +147,6 @@ namespace Questions
                     string bestedingen = CheckPurchase(dataList);
                 }
             }
-            else
-            {
-                Console.WriteLine("Bedankt voor uw deelname");
-            }
             return leeftijd;
         }
 
@@ -156,9 +154,7 @@ namespace Questions
         {
             if (leeftijd >= 12 && leeftijd <= 130)
             {
-                if (leeftijd <= 16)
-                    return true;
-                    else return false;
+                return true;
             }
             else
             {
